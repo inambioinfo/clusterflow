@@ -75,11 +75,17 @@ my $adapter = defined($cf{'params'}{'adapter'}) ? "--adapter ".uc($cf{'params'}{
 my $RRBS = defined($cf{'params'}{'RRBS'}) ? "--RRBS" : '';
 my $fqc = (defined($cf{'params'}{'nofastqc'})) ? '' : '--fastqc_args "-q"';
 
-my $clip_r1 = "";
-my $clip_r2 = "";
+my $clip_r1 = defined($cf{'params'}{'clip_r1'}) ? "--clip_r1 ".$cf{'params'}{'clip_r1'} : '';
+my $clip_r2 = defined($cf{'params'}{'clip_r2'}) ? "--clip_r2 ".$cf{'params'}{'clip_r2'} : '';
 if(defined($cf{'params'}{'trim'})){
 	$clip_r1 = "--clip_r1 $cf{'params'}{'trim'}";
 	$clip_r2 = "--clip_r2 $cf{'params'}{'trim'}";
+}
+if(defined($cf{'params'}{'three_prime_clip_r1'})){
+	$clip_r1 .= " --three_prime_clip_r1 ".$cf{'params'}{'three_prime_clip_r1'};
+}
+if(defined($cf{'params'}{'three_prime_clip_r2'})){
+	$clip_r2 .= " --three_prime_clip_r2 ".$cf{'params'}{'three_prime_clip_r2'};
 }
 if(defined($cf{'params'}{'pbat'})){
 	$clip_r1 = "--clip_r1 6";
